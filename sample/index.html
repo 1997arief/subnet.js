@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>subnet-ipv4.js</title>
+    </head>
+    <body>
+    	<form id="subnetForm">
+	    	<input type="text" id="ip" value="192.168.0.100" required>
+	    	<input type="number" id="mask" value="24" min="1" max="32" required><br>
+	    	<input type="button" name="btn" value="Submit" onclick="formSubnet();">
+	    	<input type="reset" name="reset" value="Reset">
+    	</form>
+    	<div id="main"></div>
+        <script src="../Subnet.js"></script>
+        <script type="text/javascript">
+        	function formSubnet() {
+        		let ip = document.getElementById('ip').value, mask = document.getElementById('mask').value;
+        		let subnet = new Subnet(ip, mask);
+	        	let report = subnet.getReport(), html = '';
+	        	console.log(report);
+
+	        	html += '<table>';
+	        	html += '<tr><th>Key</th><th>Value</th></tr>';
+	        	for( var key in report){
+	        		html += '<tr><td>'+key+'</td><td>'+report[key]+'</td></tr>';
+	        	}
+	        	html += '</table>';
+	        	document.getElementById('main').innerHTML = html;
+	        	return false;
+        	}
+        </script>
+    </body>
+</html>
